@@ -1,7 +1,9 @@
-import React from "react";
-import TaskFilter from "../task-filter/task-filter";
-import "./footer.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import TaskFilter from '../task-filter/task-filter';
+
+import './footer.css';
 
 const Footer = ({ buttons, selectedButton, clearCompleted, todoCount }) => {
   return (

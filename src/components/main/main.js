@@ -1,8 +1,10 @@
-import React from "react";
-import TaskList from "../task-list/task-list";
-import Footer from "../footer/footer";
-import "./main.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import TaskList from '../task-list/task-list';
+import Footer from '../footer/footer';
+
+import './main.css';
 
 const Main = ({
   todos,
@@ -17,19 +19,8 @@ const Main = ({
 }) => {
   return (
     <section className="main">
-      <TaskList
-        todos={todos}
-        onDelete={onDelete}
-        onComplete={onComplete}
-        onEdit={onEdit}
-        taskUpdate={taskUpdate}
-      />
-      <Footer
-        buttons={buttons}
-        selectedButton={selectedButton}
-        clearCompleted={clearCompleted}
-        todoCount={todoCount}
-      />
+      <TaskList todos={todos} onDelete={onDelete} onComplete={onComplete} onEdit={onEdit} taskUpdate={taskUpdate} />
+      <Footer buttons={buttons} selectedButton={selectedButton} clearCompleted={clearCompleted} todoCount={todoCount} />
     </section>
   );
 };

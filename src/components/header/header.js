@@ -1,7 +1,8 @@
-import React from "react";
-import AppTitle from "../app-title/app-title";
-import NewTaskForm from "../new-task-form/new-task-form";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import AppTitle from '../app-title/app-title';
+import NewTaskForm from '../new-task-form/new-task-form';
 
 const Header = ({ addTask }) => {
   return (

@@ -1,12 +1,12 @@
-import React from "react";
-import "./task-filter-element.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './task-filter-element.css';
+import PropTypes from 'prop-types';
 
 class TaskFilterElement extends React.Component {
   render() {
-    let addClass = "";
+    let addClass = '';
     if (this.props.isSelected) {
-      addClass += "selected";
+      addClass += 'selected';
     }
 
     return (
@@ -22,7 +22,7 @@ class TaskFilterElement extends React.Component {
 TaskFilterElement.defaultProps = {
   isSelected: false,
   selectedButton: () => {},
-  value: "Button",
+  value: 'Button',
 };
 TaskFilterElement.propTypes = {
   isSelected: PropTypes.bool,

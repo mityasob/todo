@@ -1,7 +1,8 @@
-import React from "react";
-import Header from "../header/header";
-import Main from "../main/main";
-import "./app.css";
+import React from 'react';
+
+import Header from '../header/header';
+import Main from '../main/main';
+import './app.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,15 +11,11 @@ class App extends React.Component {
     this.startId = 1;
 
     this.state = {
-      taskArr: [
-        this.createTask("Open one eye"),
-        this.createTask("Open second eye"),
-        this.createTask("Drink coffee"),
-      ],
+      taskArr: [this.createTask('Open one eye'), this.createTask('Open second eye'), this.createTask('Drink coffee')],
       buttonsArr: [
-        { id: 1, value: "All", selected: false },
-        { id: 2, value: "Active", selected: false },
-        { id: 3, value: "Completed", selected: false },
+        { id: 1, value: 'All', selected: false },
+        { id: 2, value: 'Active', selected: false },
+        { id: 3, value: 'Completed', selected: false },
       ],
       itemsLeft: 3,
     };
@@ -36,10 +33,7 @@ class App extends React.Component {
   deleteTask = (id) => {
     this.setState(({ taskArr, itemsLeft }) => {
       const index = taskArr.findIndex((el) => el.id === id);
-      const newTaskArr = [
-        ...taskArr.slice(0, index),
-        ...taskArr.slice(index + 1),
-      ];
+      const newTaskArr = [...taskArr.slice(0, index), ...taskArr.slice(index + 1)];
       let itemsCount;
       if (!taskArr[index].completed) {
         itemsCount = Number(itemsLeft) - 1;
@@ -71,11 +65,7 @@ class App extends React.Component {
       const index = taskArr.findIndex((el) => el.id === id);
       const targetItem = taskArr[index];
       const completedItem = { ...targetItem, completed: !targetItem.completed };
-      const newTaskArr = [
-        ...taskArr.slice(0, index),
-        completedItem,
-        ...taskArr.slice(index + 1),
-      ];
+      const newTaskArr = [...taskArr.slice(0, index), completedItem, ...taskArr.slice(index + 1)];
       let itemsCount;
       if (targetItem.completed) {
         itemsCount = Number(itemsLeft) + 1;
@@ -94,11 +84,7 @@ class App extends React.Component {
       const index = taskArr.findIndex((el) => el.id === id);
       const targetItem = taskArr[index];
       const editingItem = { ...targetItem, edited: !targetItem.edited };
-      const newTaskArr = [
-        ...taskArr.slice(0, index),
-        editingItem,
-        ...taskArr.slice(index + 1),
-      ];
+      const newTaskArr = [...taskArr.slice(0, index), editingItem, ...taskArr.slice(index + 1)];
       return {
         taskArr: newTaskArr,
       };
@@ -126,7 +112,7 @@ class App extends React.Component {
       });
       const newButtonsArr = [...before, selectedButton, ...after];
       const newTaskArr = [];
-      if (selectedButton.value === "Completed") {
+      if (selectedButton.value === 'Completed') {
         taskArr.forEach((el) => {
           if (!el.completed) {
             el.display = !selectedButton.selected;
@@ -137,7 +123,7 @@ class App extends React.Component {
           }
         });
       }
-      if (selectedButton.value === "Active") {
+      if (selectedButton.value === 'Active') {
         taskArr.forEach((el) => {
           if (el.completed) {
             el.display = !selectedButton.selected;
@@ -148,7 +134,7 @@ class App extends React.Component {
           }
         });
       }
-      if (selectedButton.value === "All") {
+      if (selectedButton.value === 'All') {
         taskArr.forEach((el) => {
           el.display = selectedButton.selected;
           newTaskArr.push(el);
@@ -186,11 +172,7 @@ class App extends React.Component {
           edited: false,
           display: true,
         };
-        const newTaskArr = [
-          ...taskArr.slice(0, index),
-          editingItem,
-          ...taskArr.slice(index + 1),
-        ];
+        const newTaskArr = [...taskArr.slice(0, index), editingItem, ...taskArr.slice(index + 1)];
         return {
           taskArr: newTaskArr,
         };
@@ -200,7 +182,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <section className='todoapp'>
+      <section className="todoapp">
         <Header addTask={this.addTask} />
         <Main
           todos={this.state.taskArr}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const AppTitle = () => {
   return <h1>todos</h1>;

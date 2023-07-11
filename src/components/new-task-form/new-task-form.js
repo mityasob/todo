@@ -1,19 +1,19 @@
-import React from "react";
-import "./new-task-form.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './new-task-form.css';
+import PropTypes from 'prop-types';
 
 class NewTaskForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "",
+      value: '',
     };
   }
 
   changeInputValue = (event) => {
     this.setState({
-      value: event.target.value === " " ? "" : event.target.value,
+      value: event.target.value === ' ' ? '' : event.target.value,
     });
   };
 
@@ -21,7 +21,7 @@ class NewTaskForm extends React.Component {
     event.preventDefault();
     this.props.addTask(this.state.value);
     this.setState({
-      value: "",
+      value: '',
     });
   };
 

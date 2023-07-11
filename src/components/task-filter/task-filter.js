@@ -1,7 +1,8 @@
-import React from "react";
-import "./task-filter.css";
-import TaskFilterElement from "../task-filter-element/task-filter-element";
-import PropTypes from "prop-types";
+import React from 'react';
+import './task-filter.css';
+import PropTypes from 'prop-types';
+
+import TaskFilterElement from '../task-filter-element/task-filter-element';
 
 class TaskFilter extends React.Component {
   render() {
