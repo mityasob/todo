@@ -1,0 +1,4 @@
+.edit-task-form {
+	display: flex;
+  flex-direction: row;
+}
