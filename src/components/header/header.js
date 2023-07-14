@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppTitle from '../app-title/app-title';
-import NewTaskForm from '../new-task-form/new-task-form';
+import NewTaskForm from '../NewTaskForm';
 
 const Header = ({ addTask }) => {
   return (
     <header className="header">
-      <AppTitle />
+      <h1>todos</h1>
       <NewTaskForm addTask={addTask} />
     </header>
   );

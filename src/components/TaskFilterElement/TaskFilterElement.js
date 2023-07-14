@@ -1,5 +1,5 @@
 import React from 'react';
-import './task-filter-element.css';
+import './TaskFilterElement.css';
 import PropTypes from 'prop-types';
 
 class TaskFilterElement extends React.Component {
@@ -11,7 +11,7 @@ class TaskFilterElement extends React.Component {
 
     return (
       <li>
-        <button className={addClass} onClick={this.props.selectedButton}>
+        <button type="button" className={addClass} onClick={this.props.selectedButton}>
           {this.props.value}
         </button>
       </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './task.css';
+import './Task.css';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 
@@ -40,9 +40,14 @@ class Task extends React.Component {
     };
 
     return (
-      <li className={`${toggleComplete} + ${toggleEdit}`} style={isDisplayed}>
+      <li className={`${toggleComplete} ${toggleEdit}`} style={isDisplayed}>
         <div className="view">
-          <input className="toggle" type="checkbox" />
+          <input
+            className="toggle"
+            type="checkbox"
+            onChange={this.props.onComplete}
+            checked={this.props.todos.completed}
+          />
           <label>
             <span className="description" onClick={this.props.onComplete}>
               {this.props.todos.value}
@@ -53,8 +58,13 @@ class Task extends React.Component {
               })}
             </span>
           </label>
-          <button className="icon icon-edit" onClick={this.props.onEdit}></button>
-          <button className="icon icon-destroy" onClick={this.props.onDelete}></button>
+          <button type="button" title="Edit Task" className="icon icon-edit" onClick={this.props.onEdit}></button>
+          <button
+            type="button"
+            title="Delete Task"
+            className="icon icon-destroy"
+            onClick={this.props.onDelete}
+          ></button>
         </div>
         <form className="edit-task-form" style={isVisible} onSubmit={this.submitForm}>
           <input type="text" className="edit" value={this.state.inputValue} onChange={this.changeInput}></input>

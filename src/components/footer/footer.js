@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TaskFilter from '../task-filter/task-filter';
+import TaskFilter from '../TaskFilter';
 
-import './footer.css';
+import './Footer.css';
 
 const Footer = ({ buttons, selectedButton, clearCompleted, todoCount }) => {
   return (
     <footer className="footer">
       <span className="todo-count">{todoCount} items left</span>
       <TaskFilter buttons={buttons} selectedButton={selectedButton} />
-      <button className="clear-completed" onClick={() => clearCompleted()}>
+      <button type="button" className="clear-completed" onClick={clearCompleted}>
         Clear completed
       </button>
     </footer>

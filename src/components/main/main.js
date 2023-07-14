@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TaskList from '../task-list/task-list';
-import Footer from '../footer/footer';
+import TaskList from '../TaskList';
+import Footer from '../Footer';
 
-import './main.css';
+import './Main.css';
 
 const Main = ({
   todos,
