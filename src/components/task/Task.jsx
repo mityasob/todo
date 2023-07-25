@@ -49,10 +49,15 @@ class Task extends React.Component {
             checked={this.props.todos.completed}
           />
           <label>
-            <span className="description" onClick={this.props.onComplete}>
+            <span className="title" onClick={this.props.onComplete}>
               {this.props.todos.value}
             </span>
-            <span className="created">
+            <span className="description">
+              <button className="icon icon-play"></button>
+              <button className="icon icon-pause"></button>
+              12:25
+            </span>
+            <span className="description">
               {formatDistanceToNow(this.props.todos.date, {
                 includeSeconds: true,
               })}
