@@ -23,6 +23,7 @@
   "rules": {
     "consistent-return": "off",
     "no-param-reassign": "off",
+    "default-param-last": 0,
     "no-plusplus": "off",
     "indent": ["error", 2],
     "prettier/prettier": "error",

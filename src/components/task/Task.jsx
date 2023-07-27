@@ -3,6 +3,8 @@ import './Task.css';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 
+import Timer from '../Timer';
+
 class Task extends React.Component {
   constructor(props) {
     super(props);
@@ -48,21 +50,17 @@ class Task extends React.Component {
             onChange={this.props.onComplete}
             checked={this.props.todos.completed}
           />
-          <label>
+          <div className="task-details">
             <span className="title" onClick={this.props.onComplete}>
               {this.props.todos.value}
             </span>
-            <span className="description">
-              <button className="icon icon-play"></button>
-              <button className="icon icon-pause"></button>
-              12:25
-            </span>
+            <Timer todos={this.props.todos} />
             <span className="description">
               {formatDistanceToNow(this.props.todos.date, {
                 includeSeconds: true,
               })}
             </span>
-          </label>
+          </div>
           <button type="button" title="Edit Task" className="icon icon-edit" onClick={this.props.onEdit}></button>
           <button
             type="button"

@@ -11,7 +11,11 @@ class App extends React.Component {
     this.startId = 1;
 
     this.state = {
-      taskArray: [this.createTask('Open one eye'), this.createTask('Open second eye'), this.createTask('Drink coffee')],
+      taskArray: [
+        this.createTask('Open one eye', 0, 13),
+        this.createTask('Open second eye', 1, 15),
+        this.createTask('Drink coffee', 23, 19),
+      ],
       buttonsArray: [
         { id: 1, value: 'All', selected: true },
         { id: 2, value: 'Active', selected: false },
@@ -21,9 +25,11 @@ class App extends React.Component {
     };
   }
 
-  createTask = (valueText) => ({
+  createTask = (valueText, valueMinutes, valueSeconds) => ({
     id: this.startId++,
     value: valueText,
+    minutes: valueMinutes,
+    seconds: valueSeconds,
     completed: false,
     checked: false,
     edited: false,
@@ -49,12 +55,12 @@ class App extends React.Component {
     });
   };
 
-  addTask = (inputValue) => {
+  addTask = (inputValue, inputMinutes, inputSeconds) => {
     const { taskArray, itemsLeft } = this.state;
     let newtaskArray;
     let itemsCount;
-    if (inputValue) {
-      newtaskArray = [...taskArray, this.createTask(inputValue)];
+    if (inputValue && (inputMinutes || inputSeconds)) {
+      newtaskArray = [...taskArray, this.createTask(inputValue, inputMinutes, inputSeconds)];
       itemsCount = Number(itemsLeft) + 1;
     } else return;
     this.setState(() => {

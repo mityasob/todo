@@ -23,7 +23,7 @@ class NewTaskForm extends React.Component {
     const num = Number(event.target.value);
     if ((num >= 0 && num < 60) || num === null) {
       this.setState({
-        minutes: num,
+        minutes: event.target.value === ' ' ? '' : num,
       });
     }
   };
@@ -31,17 +31,25 @@ class NewTaskForm extends React.Component {
   changeInputSeconds = (event) => {
     const num = Number(event.target.value);
     if ((num >= 0 && num < 60) || num === null) {
-      this.setState({
-        seconds: num,
-      });
+      if (num >= 10) {
+        this.setState({
+          seconds: event.target.value === ' ' ? '' : num,
+        });
+      } else {
+        this.setState({
+          seconds: event.target.value === ' ' ? '' : `0${num}`,
+        });
+      }
     }
   };
 
   submitForm = (event) => {
     event.preventDefault();
-    this.props.addTask(this.state.value);
+    this.props.addTask(this.state.value, this.state.minutes, this.state.seconds);
     this.setState({
       value: '',
+      minutes: '',
+      seconds: '',
     });
   };
 
@@ -53,6 +61,7 @@ class NewTaskForm extends React.Component {
           className="new-todo"
           placeholder="Task"
           autoFocus
+          required
           value={this.state.value}
           onChange={this.changeInputValue}
         />
@@ -61,6 +70,7 @@ class NewTaskForm extends React.Component {
           className="new-todo-form__timer"
           placeholder="Min"
           autoFocus
+          required
           value={this.state.minutes}
           onChange={this.changeInputMinutes}
         />
@@ -69,22 +79,12 @@ class NewTaskForm extends React.Component {
           className="new-todo-form__timer"
           placeholder="Sec"
           autoFocus
+          required
           value={this.state.seconds}
           onChange={this.changeInputSeconds}
         />
+        <button type="submit" className="create-task"></button>
       </form>
-      // <form className="new-task-form" onSubmit={this.submitForm}>
-      //   <input
-      //     className="new-todo"
-      //     placeholder="What needs to be done?"
-      //     autoFocus
-      //     value={this.state.value}
-      //     onChange={this.changeInputValue}
-      //   />
-      //   <button type="submit" className="add-task">
-      //     Add Task
-      //   </button>
-      // </form>
     );
   }
 }
