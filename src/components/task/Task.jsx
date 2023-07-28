@@ -11,6 +11,7 @@ class Task extends React.Component {
 
     this.state = {
       inputValue: this.props.todos.value,
+      focus: false,
     };
   }
 
@@ -69,12 +70,20 @@ class Task extends React.Component {
             onClick={this.props.onDelete}
           ></button>
         </div>
-        <form className="edit-task-form" style={isVisible} onSubmit={this.submitForm}>
-          <input type="text" className="edit" value={this.state.inputValue} onChange={this.changeInput}></input>
-          <button type="submit" className="add-task">
-            Save Task
-          </button>
-        </form>
+        {this.props.todos.edited && (
+          <form className="edit-task-form" style={isVisible} onSubmit={this.submitForm}>
+            <input
+              type="text"
+              className="edit"
+              autoFocus={this.props.todos.edited}
+              value={this.state.inputValue}
+              onChange={this.changeInput}
+            ></input>
+            <button type="submit" className="add-task">
+              Save Task
+            </button>
+          </form>
+        )}
       </li>
     );
   }

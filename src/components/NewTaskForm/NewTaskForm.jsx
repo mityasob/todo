@@ -69,7 +69,6 @@ class NewTaskForm extends React.Component {
           id="minutes"
           className="new-todo-form__timer"
           placeholder="Min"
-          autoFocus
           required
           value={this.state.minutes}
           onChange={this.changeInputMinutes}
@@ -78,7 +77,6 @@ class NewTaskForm extends React.Component {
           id="seconds"
           className="new-todo-form__timer"
           placeholder="Sec"
-          autoFocus
           required
           value={this.state.seconds}
           onChange={this.changeInputSeconds}

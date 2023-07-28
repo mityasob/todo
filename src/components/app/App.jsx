@@ -106,39 +106,24 @@ class App extends React.Component {
 
   handleButton = (id) => {
     const { taskArray, buttonsArray } = this.state;
-    const index = buttonsArray.findIndex((el) => el.id === id);
-    const targetItem = buttonsArray[index];
-    const selectedButton = { ...targetItem, selected: true };
-    const before = [];
-    [...buttonsArray.slice(0, index)].forEach((el) => {
-      el.selected = !selectedButton;
-      before.push(el);
+    const targetIndex = buttonsArray.findIndex((el) => el.id === id);
+    const targetItem = buttonsArray[targetIndex];
+    const newbuttonsArray = buttonsArray.slice();
+    newbuttonsArray.forEach((el, index) => {
+      if (index === targetIndex) {
+        el.selected = true;
+      } else {
+        el.selected = false;
+      }
     });
-    const after = [];
-    [...buttonsArray.slice(index + 1)].forEach((el) => {
-      el.selected = !selectedButton;
-      after.push(el);
+    const newtaskArray = taskArray.slice();
+    newtaskArray.forEach((el) => {
+      if ((targetItem.value === 'Completed' && !el.completed) || (targetItem.value === 'Active' && el.completed)) {
+        el.display = false;
+      } else {
+        el.display = true;
+      }
     });
-    const newbuttonsArray = [...before, selectedButton, ...after];
-    const newtaskArray = [];
-    if (selectedButton.value === 'Completed') {
-      taskArray.forEach((el) => {
-        el.display = el.completed ? selectedButton.selected : !selectedButton.selected;
-        newtaskArray.push(el);
-      });
-    }
-    if (selectedButton.value === 'Active') {
-      taskArray.forEach((el) => {
-        el.display = el.completed ? !selectedButton.selected : selectedButton.selected;
-        newtaskArray.push(el);
-      });
-    }
-    if (selectedButton.value === 'All') {
-      taskArray.forEach((el) => {
-        el.display = selectedButton.selected;
-        newtaskArray.push(el);
-      });
-    }
     this.setState(() => {
       return {
         taskArray: newtaskArray,
