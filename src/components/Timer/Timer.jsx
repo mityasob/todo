@@ -1,77 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Timer.css';
 import PropTypes from 'prop-types';
 
-class Timer extends React.Component {
-  constructor(props) {
-    super(props);
+const Timer = ({ todos }) => {
+  const [minutesLeft, setMinutesLeft] = useState(todos.minutes);
+  const [secondsLeft, setSecondsLeft] = useState(todos.seconds);
+  const [play, setPlay] = useState(false);
+  const [stop, setStop] = useState(true);
 
-    this.state = {
-      minutes: this.props.todos.minutes,
-      seconds: this.props.todos.seconds,
-      play: false,
-      stop: true,
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.play !== prevState.play) {
-      if (this.state.play) {
-        this.timerID = setInterval(() => this.tick(), 1000);
-      } else {
-        clearInterval(this.timerID);
-      }
+  function handlePlayButton() {
+    if (!play && (minutesLeft || Number(secondsLeft))) {
+      setPlay(true);
+      setStop(false);
     }
   }
 
-  tick() {
-    const { minutes, seconds } = this.state;
-    if (!minutes && Number(seconds) === 1) {
-      clearInterval(this.timerID);
+  function handleStopButton() {
+    if (!stop) {
+      setPlay(false);
+      setStop(true);
     }
-    if (!Number(seconds)) {
-      this.setState({
-        minutes: minutes - 1,
-        seconds: 59,
-      });
+  }
+
+  function tick() {
+    if (!Number(secondsLeft)) {
+      setMinutesLeft(minutesLeft - 1);
+      setSecondsLeft(59);
     } else {
-      this.setState({
-        seconds: seconds > 10 ? seconds - 1 : `0${seconds - 1}`,
-      });
+      setSecondsLeft(secondsLeft > 10 ? secondsLeft - 1 : `0${secondsLeft - 1}`);
     }
   }
 
-  handlePlayButton = () => {
-    const { minutes, seconds, play } = this.state;
-    if (!play && (minutes || Number(seconds))) {
-      this.setState({
-        play: true,
-        stop: false,
-      });
+  useEffect(() => {
+    let timerID;
+    if (!minutesLeft && !Number(secondsLeft)) {
+      setPlay(false);
     }
-  };
-
-  handleStopButton = () => {
-    if (!this.state.stop) {
-      this.setState({
-        play: false,
-        stop: true,
-      });
+    if (play) {
+      timerID = setInterval(() => tick(), 1000);
     }
-  };
+    return () => clearInterval(timerID);
+  });
 
-  render() {
-    return (
-      <span className="description">
-        <button className="icon icon-play" onClick={this.handlePlayButton}></button>
-        <button className="icon icon-pause" onClick={this.handleStopButton}></button>
-        <span>
-          {this.state.minutes}:{this.state.seconds}
-        </span>
+  return (
+    <span className="description">
+      <button className="icon icon-play" onClick={handlePlayButton}></button>
+      <button className="icon icon-pause" onClick={handleStopButton}></button>
+      <span>
+        {minutesLeft}:{secondsLeft}
       </span>
-    );
-  }
-}
+    </span>
+  );
+};
 
 Timer.defaultProps = {
   todos: {},
