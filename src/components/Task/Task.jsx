@@ -11,7 +11,6 @@ class Task extends React.Component {
 
     this.state = {
       inputValue: this.props.todos.value,
-      focus: false,
     };
   }
 
